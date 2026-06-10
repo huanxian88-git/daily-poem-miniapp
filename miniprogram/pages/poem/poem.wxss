@@ -1,0 +1,122 @@
+/* pages/poem/poem.wxss - 诗词详情页 */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: calc(var(--safe-bottom) + 120rpx);
+}
+
+/* AI场景描述 */
+.scene-desc {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: rgba(45, 90, 61, 0.04);
+}
+
+.scene-desc-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* 诗词元信息 */
+.poem-meta {
+  text-align: center;
+  padding: var(--spacing-lg) 0 var(--spacing-sm);
+}
+
+.poem-title {
+  display: block;
+  font-size: var(--font-size-xxl);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.poem-author {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* 诗词正文 - 每行不跨行换行 */
+.poem-content {
+  font-family: var(--font-poem);
+  font-size: var(--font-size-xl);
+  line-height: 2.0;
+  letter-spacing: 2rpx;
+  color: var(--color-text);
+  padding: var(--spacing-md) 0;
+  text-align: center;
+}
+
+.poem-line {
+  white-space: nowrap;
+  display: block;
+}
+
+/* 注释译文区域 */
+.annotation-section {
+  margin-top: var(--spacing-md);
+  border-top: 1rpx solid var(--color-border);
+}
+
+.annotation-toggle {
+  text-align: center;
+  padding: var(--spacing-md) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+}
+
+.annotation-body {
+  padding: 0 var(--spacing-sm) var(--spacing-md);
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.annotation-block {
+  margin-bottom: var(--spacing-md);
+}
+
+.annotation-label {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.annotation-item {
+  display: flex;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.annotation-key {
+  color: var(--color-accent);
+  font-weight: 500;
+  margin-right: var(--spacing-xs);
+  white-space: nowrap;
+}
+
+.annotation-value {
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.translation-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+/* 珍藏按钮激活态 */
+.action-btn.active {
+  background: var(--color-secondary);
+  color: var(--color-white);
+  border-color: var(--color-secondary);
+}

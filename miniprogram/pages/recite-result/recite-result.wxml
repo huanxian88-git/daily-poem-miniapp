@@ -1,0 +1,69 @@
+<!--pages/recite-result/recite-result.wxml - 背诵结果页-->
+<scroll-view class="page" scroll-y enable-flex>
+
+  <!-- 加载态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="skeleton" style="height: 120rpx; width: 50%; margin: 0 auto 32rpx;"></view>
+    <view class="skeleton" style="height: 300rpx; margin-bottom: 24rpx;"></view>
+  </view>
+
+  <block wx:elif="{{result}}">
+    <!-- 顶部：成诵/未通过状态 -->
+    <view class="result-header {{result.mastered ? 'success' : 'encourage'}}">
+      <text class="result-icon">{{result.mastered ? '📜' : '💪'}}</text>
+      <text class="result-status">{{result.mastered ? '成诵！' : '再接再厉'}}</text>
+      <text class="result-message">{{result.mastered ? '此诗已入你心' : '每一次尝试都是积累'}}</text>
+    </view>
+
+    <!-- 正向框架：记对的字数 -->
+    <view class="positive-card">
+      <text class="positive-num">{{result.totalCorrectChars || 0}}</text>
+      <text class="positive-unit">个字记对了</text>
+    </view>
+
+    <!-- 三关分数 -->
+    <view class="scores-card">
+      <view class="scores-title">三关成绩</view>
+      <view class="score-row">
+        <view class="score-item {{result.fillScore >= 60 ? 'pass' : 'fail'}}">
+          <text class="score-label">补阙填词</text>
+          <text class="score-value">{{result.fillScore}}</text>
+          <text class="score-unit">分</text>
+        </view>
+      </view>
+      <view class="score-row">
+        <view class="score-item {{result.sortScore >= 60 ? 'pass' : 'fail'}}">
+          <text class="score-label">排序归位</text>
+          <text class="score-value">{{result.sortScore}}</text>
+          <text class="score-unit">分</text>
+        </view>
+      </view>
+      <view class="score-row">
+        <view class="score-item {{result.voiceScore >= 60 ? 'pass' : 'fail'}}">
+          <text class="score-label">语音背诵</text>
+          <text class="score-value">{{result.voiceScore}}</text>
+          <text class="score-unit">分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 错题标记（琥珀色） -->
+    <view class="errors-card" wx:if="{{result.wrongDetails && result.wrongDetails.length}}">
+      <view class="errors-title">再记一遍</view>
+      <view class="error-line" wx:for="{{result.wrongDetails}}" wx:key="index">
+        <text class="error-correct">{{item.correct}}</text>
+        <text class="error-sep">←</text>
+        <text class="error-wrong">{{item.wrong}}</text>
+      </view>
+    </view>
+
+    <!-- 操作栏 -->
+    <view class="bottom-actions safe-bottom">
+      <button class="action-btn" bindtap="goBack">返回</button>
+      <button class="action-btn primary" bindtap="{{result.mastered ? 'goHome' : 'retry'}}">
+        {{result.mastered ? '回到首页' : '重新挑战'}}
+      </button>
+    </view>
+  </block>
+
+</scroll-view>

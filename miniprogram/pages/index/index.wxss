@@ -1,4 +1,4 @@
-/* pages/index/index.wxss */
+/* pages/index/index.wxss - 首页升级 */
 
 .page {
   min-height: 100vh;
@@ -16,6 +16,16 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   letter-spacing: 2rpx;
+  display: block;
+}
+
+.zero-pressure {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-secondary);
+  letter-spacing: 4rpx;
+  font-style: italic;
 }
 
 .reason-text {
@@ -52,12 +62,133 @@
   margin-top: 4rpx;
 }
 
+/* 诗词行不换行 */
+.poem-line {
+  white-space: nowrap;
+  display: block;
+}
+
 /* 展开提示 */
 .expand-hint {
   text-align: center;
   padding: var(--spacing-md) 0 var(--spacing-sm);
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
+}
+
+/* 双入口卡片 */
+.entry-cards {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.entry-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s var(--ease-out);
+}
+
+.entry-card:active {
+  background: var(--color-hover);
+}
+
+.entry-icon-wrap {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.entry-icon-wrap.recite-icon {
+  background: rgba(45, 90, 61, 0.1);
+}
+
+.entry-icon-wrap.review-icon {
+  background: rgba(196, 162, 101, 0.1);
+}
+
+.entry-icon {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.recite-icon .entry-icon {
+  color: var(--color-primary);
+}
+
+.review-icon .entry-icon {
+  color: var(--color-secondary);
+}
+
+.entry-info {
+  flex: 1;
+}
+
+.entry-label {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.entry-count {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 2rpx;
+}
+
+.entry-arrow {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+/* 课本卡片 */
+.textbook-card {
+  margin: var(--spacing-md) var(--spacing-md) 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+}
+
+.textbook-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-right: var(--spacing-sm);
+  white-space: nowrap;
+}
+
+.textbook-info {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* 操作栏 - secondary样式 */
+.action-btn.secondary {
+  background: var(--color-white);
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+
+.action-btn.secondary.active {
+  background: var(--color-secondary);
+  color: var(--color-white);
 }
 
 /* 零压力提示 */

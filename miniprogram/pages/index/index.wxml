@@ -1,4 +1,4 @@
-<!--pages/index/index.wxml-->
+<!--pages/index/index.wxml - 首页升级-->
 <scroll-view
   class="page"
   scroll-y
@@ -23,9 +23,10 @@
 
   <!-- 推荐内容 -->
   <block wx:elif="{{poem}}">
-    <!-- 日期 + 推荐理由 -->
+    <!-- 日期行 + 零压力提示 -->
     <view class="date-reason">
       <text class="date-text">{{todayDate}}</text>
+      <text class="zero-pressure" wx:if="{{showZeroPressureHint}}">不背也美，看看就好</text>
       <text class="reason-text" wx:if="{{reason}}">{{reason}}</text>
     </view>
 
@@ -36,9 +37,14 @@
 
     <!-- 诗词卡片 -->
     <view class="poem-card">
-      <!-- 正文 -->
+      <!-- 正文（按行遍历） -->
       <view class="poem-content" bindtap="viewPoemDetail">
-        {{poem.content}}
+        <view class="poem-line" wx:for="{{poem.content_lines || []}}" wx:key="index">
+          {{item}}
+        </view>
+        <view wx:if="{{!poem.content_lines || poem.content_lines.length === 0}}">
+          {{poem.content}}
+        </view>
       </view>
 
       <!-- 标题/作者 -->
@@ -54,17 +60,50 @@
       </view>
     </view>
 
-    <!-- 操作栏 -->
-    <view class="action-bar">
-      <view class="action-btn" bindtap="switchPoem">
-        <text wx:if="{{canSwitch}}">另择</text>
-        <text wx:else style="color: var(--color-disabled)">今日已满</text>
+    <!-- 双入口卡片：吟诵 / 临帖 -->
+    <view class="entry-cards">
+      <view class="entry-card" bindtap="goToRecite">
+        <view class="entry-icon-wrap recite-icon">
+          <text class="entry-icon">吟</text>
+        </view>
+        <view class="entry-info">
+          <text class="entry-label">吟诵</text>
+          <text class="entry-count">{{reciteCount}} 首在背</text>
+        </view>
+        <text class="entry-arrow">›</text>
       </view>
-      <view class="action-btn" bindtap="toggleFavorite">珍藏</view>
-      <view class="action-btn primary" bindtap="startRecite">吟诵 · 开始背诵</view>
+      <view class="entry-card" bindtap="goToReview">
+        <view class="entry-icon-wrap review-icon">
+          <text class="entry-icon">临</text>
+        </view>
+        <view class="entry-info">
+          <text class="entry-label">临帖</text>
+          <text class="entry-count">{{reviewCount}} 首待复习</text>
+        </view>
+        <text class="entry-arrow">›</text>
+      </view>
     </view>
 
-    <!-- 零压力提示 -->
+    <!-- 课本卡片（仅学生用户） -->
+    <view class="textbook-card" wx:if="{{isStudent && textbookInfo}}">
+      <text class="textbook-label">📖 课本进度</text>
+      <text class="textbook-info">{{textbookInfo}}</text>
+    </view>
+
+    <!-- 操作栏：珍藏(secondary样式) + 吟诵(主按钮) -->
+    <view class="action-bar">
+      <view class="action-btn" bindtap="switchPoem" wx:if="{{canSwitch}}">
+        <text>另择</text>
+      </view>
+      <view class="action-btn secondary {{isFavorited ? 'active' : ''}}" bindtap="toggleFavorite">
+        <text>{{isFavorited ? '已珍藏' : '珍藏'}}</text>
+      </view>
+      <view class="action-btn primary" bindtap="startRecite">
+        <text>吟诵 · 开始背诵</text>
+      </view>
+    </view>
+
+    <!-- 零压力提示底部 -->
     <view class="zero-pressure-hint">今日鉴赏，不背也美</view>
   </block>
 

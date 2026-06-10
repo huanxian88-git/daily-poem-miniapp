@@ -1,0 +1,178 @@
+/* pages/recite-result/recite-result.wxss - 背诵结果页 */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: calc(var(--safe-bottom) + 140rpx);
+}
+
+.loading-state {
+  padding: var(--spacing-xl);
+}
+
+/* 顶部状态 */
+.result-header {
+  text-align: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+}
+
+.result-header.success {
+  background: linear-gradient(180deg, rgba(93, 138, 107, 0.1) 0%, transparent 100%);
+}
+
+.result-header.encourage {
+  background: linear-gradient(180deg, rgba(196, 162, 101, 0.1) 0%, transparent 100%);
+}
+
+.result-icon {
+  display: block;
+  font-size: 72rpx;
+  margin-bottom: var(--spacing-sm);
+}
+
+.result-status {
+  display: block;
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.result-message {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* 正向框架 */
+.positive-card {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.positive-num {
+  font-size: 80rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-right: 8rpx;
+}
+
+.positive-unit {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+/* 三关分数 */
+.scores-card {
+  margin: var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.scores-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--spacing-md);
+}
+
+.score-row {
+  margin-bottom: var(--spacing-sm);
+}
+
+.score-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+
+.score-item.pass {
+  border-left: 6rpx solid var(--color-success);
+}
+
+.score-item.fail {
+  border-left: 6rpx solid var(--color-warning);
+}
+
+.score-label {
+  flex: 1;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.score-value {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.score-item.fail .score-value {
+  color: var(--color-warning);
+}
+
+.score-unit {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-left: 4rpx;
+}
+
+/* 错题标记 */
+.errors-card {
+  margin: var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.errors-title {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-warning);
+  margin-bottom: var(--spacing-sm);
+}
+
+.error-line {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+}
+
+.error-correct {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.error-sep {
+  color: var(--color-text-muted);
+}
+
+.error-wrong {
+  color: var(--color-warning);
+  text-decoration: line-through;
+}
+
+/* 底部操作 */
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-white);
+  border-top: 1rpx solid var(--color-border);
+}

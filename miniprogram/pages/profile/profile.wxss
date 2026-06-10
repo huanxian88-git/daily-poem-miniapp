@@ -1,53 +1,192 @@
-.page-header {
+/* pages/profile/profile.wxss - 我的Tab升级 */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: var(--safe-bottom);
+}
+
+/* 未登录 */
+.login-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: var(--spacing-lg) 0;
+  padding: var(--spacing-xl) var(--spacing-lg);
 }
 
-.page-title {
-  font-size: var(--font-size-xl);
-  font-weight: bold;
-  color: var(--color-primary);
+.login-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
 }
 
+.login-icon {
+  font-size: 80rpx;
+  margin-bottom: var(--spacing-md);
+}
+
+.login-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+}
+
+/* 用户卡片 */
 .user-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #fff;
-  border-radius: var(--radius-md);
-  padding: var(--spacing-lg);
-  border: 1rpx solid var(--color-border);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: linear-gradient(135deg, var(--color-primary) 0%, #3D7A4D 100%);
+  color: var(--color-white);
+}
+
+.user-avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 3rpx solid rgba(255, 255, 255, 0.3);
+  margin-right: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
 }
 
 .user-name {
+  display: block;
   font-size: var(--font-size-lg);
-  color: var(--color-text);
+  font-weight: 600;
+  margin-bottom: 4rpx;
 }
 
-.logout-btn {
-  padding: var(--spacing-xs) var(--spacing-md);
-  border: 1rpx solid var(--color-accent);
-  border-radius: var(--radius-sm);
+.user-profile-tag {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2rpx 16rpx;
+  border-radius: 20rpx;
 }
 
-.logout-text {
-  font-size: var(--font-size-sm);
-  color: var(--color-accent);
-}
-
-.placeholder-card {
+/* 统计摘要 */
+.stats-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 400rpx;
-  background-color: #fff;
-  border-radius: var(--radius-md);
-  border: 1rpx solid var(--color-border);
+  padding: var(--spacing-lg) var(--spacing-md);
+  background: var(--color-white);
+  margin: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
-.placeholder-text {
-  font-size: var(--font-size-md);
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: 4rpx;
+}
+
+.stat-divider {
+  width: 1rpx;
+  height: 60rpx;
+  background: var(--color-border);
+}
+
+/* 画像信息 */
+.info-card {
+  margin: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1rpx solid var(--color-bg);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
+}
+
+.info-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+/* 设置项 */
+.settings-card {
+  margin: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-bottom: 1rpx solid var(--color-bg);
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item:active {
+  background: var(--color-hover);
+}
+
+.setting-label {
+  flex: 1;
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+}
+
+.setting-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-right: var(--spacing-xs);
+}
+
+.setting-arrow {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}
+
+/* 退出登录 */
+.logout-section {
+  margin: var(--spacing-xl) var(--spacing-md);
+}
+
+.logout-btn {
+  width: 100%;
+  padding: var(--spacing-sm) 0;
+  border: 1rpx solid var(--color-accent);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-accent);
+  font-size: var(--font-size-base);
 }

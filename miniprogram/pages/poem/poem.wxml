@@ -1,0 +1,75 @@
+<!--pages/poem/poem.wxml - 诗词详情页-->
+<scroll-view class="page" scroll-y enable-flex>
+
+  <!-- 加载态 -->
+  <view class="poem-card" wx:if="{{loading}}">
+    <view class="skeleton" style="height: 320rpx; margin-bottom: 24rpx;"></view>
+    <view class="skeleton" style="height: 40rpx; width: 60%; margin-bottom: 16rpx;"></view>
+    <view class="skeleton" style="height: 28rpx; width: 80%;"></view>
+  </view>
+
+  <block wx:elif="{{poem}}">
+    <!-- AI场景图 -->
+    <view class="scene-image" wx:if="{{sceneData.image_url}}">
+      <image src="{{sceneData.image_url}}" mode="aspectFill" lazy-load />
+    </view>
+    <view class="scene-desc" wx:if="{{sceneData.description}}">
+      <text class="scene-desc-text">{{sceneData.description}}</text>
+    </view>
+
+    <!-- 诗词卡片 -->
+    <view class="poem-card">
+      <!-- 标题/作者 -->
+      <view class="poem-meta">
+        <text class="poem-title">{{poem.title}}</text>
+        <text class="poem-author">〔{{poem.dynasty}}〕{{poem.author}}</text>
+      </view>
+
+      <!-- 正文（按行遍历） -->
+      <view class="poem-content">
+        <view class="poem-line" wx:for="{{poem.content_lines}}" wx:key="index">
+          {{item}}
+        </view>
+      </view>
+
+      <!-- 注释译文（可折叠） -->
+      <view class="annotation-section">
+        <view class="annotation-toggle" bindtap="toggleAnnotation">
+          <text>{{annotationExpanded ? '收起注释译文 ▲' : '展开注释译文 ▼'}}</text>
+        </view>
+        <view class="annotation-body" wx:if="{{annotationExpanded}}">
+          <!-- 注释 -->
+          <view class="annotation-block" wx:if="{{poem.annotations && poem.annotations.length}}">
+            <text class="annotation-label">注释</text>
+            <view class="annotation-item" wx:for="{{poem.annotations}}" wx:key="key">
+              <text class="annotation-key">{{item.key}}</text>
+              <text class="annotation-value">{{item.value}}</text>
+            </view>
+          </view>
+          <!-- 译文 -->
+          <view class="annotation-block" wx:if="{{poem.translation}}">
+            <text class="annotation-label">译文</text>
+            <text class="translation-text">{{poem.translation}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 操作栏 -->
+    <view class="action-bar">
+      <view class="action-btn {{isFavorited ? 'active' : ''}}" bindtap="toggleFavorite">
+        <text>{{isFavorited ? '已珍藏' : '珍藏'}}</text>
+      </view>
+      <view class="action-btn primary" bindtap="startRecite">
+        <text>吟诵</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 错误态 -->
+  <view class="empty-state" wx:elif="{{error}}">
+    <text class="empty-text">{{error}}</text>
+    <button class="action-btn primary" bindtap="fetchPoemDetail">重试</button>
+  </view>
+
+</scroll-view>

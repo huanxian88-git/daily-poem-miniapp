@@ -1,0 +1,57 @@
+<!--pages/review/review.wxml - 临帖（复习）页-->
+<scroll-view class="page" scroll-y enable-flex refresher-enabled bindrefresherrefresh="onPullDownRefresh">
+
+  <!-- 加载态 -->
+  <view class="loading-wrap" wx:if="{{loading}}">
+    <view class="skeleton" style="height: 120rpx; margin-bottom: 24rpx;"></view>
+    <view class="skeleton" style="height: 120rpx; margin-bottom: 24rpx;"></view>
+    <view class="skeleton" style="height: 120rpx;"></view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:elif="{{!loading && queue.length === 0}}">
+    <text class="empty-icon">🌿</text>
+    <text class="empty-text">今日无需临帖</text>
+    <text class="empty-sub">新诗正在赶来，敬请期待</text>
+  </view>
+
+  <!-- 复习队列 -->
+  <block wx:elif="{{queue.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">今日临帖</text>
+      <text class="section-count">{{queue.length}} 首待复习</text>
+    </view>
+
+    <view
+      class="review-card {{item.urgency === 'high' ? 'urgent' : ''}}"
+      wx:for="{{queue}}"
+      wx:key="poem_id"
+    >
+      <!-- 紧急度标记 -->
+      <view class="urgency-badge" wx:if="{{item.urgency === 'high'}}">
+        <text class="urgency-text">急</text>
+      </view>
+
+      <!-- 诗词信息 -->
+      <view class="review-info" bindtap="viewPoem" data-poem-id="{{item.poem_id}}">
+        <text class="review-title">{{item.title}}</text>
+        <text class="review-author">〔{{item.dynasty}}〕{{item.author}}</text>
+        <text class="review-date">下次复习：{{item.next_review_date}}</text>
+      </view>
+
+      <!-- 自评按钮 -->
+      <view class="self-assess">
+        <view class="assess-btn easy" bindtap="assessPoem" data-poem-id="{{item.poem_id}}" data-level="easy">
+          <text>简单</text>
+        </view>
+        <view class="assess-btn ok" bindtap="assessPoem" data-poem-id="{{item.poem_id}}" data-level="ok">
+          <text>合适</text>
+        </view>
+        <view class="assess-btn hard" bindtap="assessPoem" data-poem-id="{{item.poem_id}}" data-level="hard">
+          <text>困难</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+</scroll-view>

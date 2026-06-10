@@ -1,0 +1,121 @@
+<!--pages/recite-check/recite-check.wxml - 背诵检查页-->
+<view class="page">
+
+  <!-- 顶部信息 -->
+  <view class="header">
+    <text class="poem-title">{{poemTitle}}</text>
+    <view class="stage-indicator">
+      <view class="stage-dot {{currentStage >= 1 ? 'active' : ''}} {{currentStage > 1 ? 'done' : ''}}"></view>
+      <view class="stage-line {{currentStage > 1 ? 'active' : ''}}"></view>
+      <view class="stage-dot {{currentStage >= 2 ? 'active' : ''}} {{currentStage > 2 ? 'done' : ''}}"></view>
+      <view class="stage-line {{currentStage > 2 ? 'active' : ''}}"></view>
+      <view class="stage-dot {{currentStage >= 3 ? 'active' : ''}}"></view>
+    </view>
+    <text class="stage-label">{{stageLabel}}</text>
+  </view>
+
+  <!-- ========== 第一关：补阙填词 ========== -->
+  <view class="stage-content" wx:if="{{currentStage === 1}}">
+    <view class="fill-poem">
+      <view class="fill-line" wx:for="{{fillLines}}" wx:key="index">
+        <block wx:for="{{item.parts}}" wx:for-item="part" wx:for-index="pIdx" wx:key="pIdx">
+          <text wx:if="{{part.type === 'text'}}" class="fill-text">{{part.content}}</text>
+          <view wx:elif="{{part.type === 'blank'}}" class="fill-blank-wrapper">
+            <input
+              class="fill-blank-input"
+              data-line-idx="{{item.lineIdx}}"
+              data-blank-idx="{{part.blankIdx}}"
+              value="{{part.filled || ''}}"
+              bindinput="onFillInput"
+              placeholder="＿"
+              adjust-position="{{true}}"
+            />
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="submit-btn-wrap">
+      <button class="action-btn primary" bindtap="submitFill" disabled="{{submitting}}">提交</button>
+    </view>
+  </view>
+
+  <!-- ========== 第二关：排序归位 ========== -->
+  <view class="stage-content" wx:if="{{currentStage === 2}}">
+    <view class="sort-hint">
+      <text>点击两个句子交换位置，还原诗句顺序</text>
+    </view>
+    <view class="sort-lines">
+      <view
+        class="sort-line {{sortSelectedIdx === index ? 'selected' : ''}} {{item.isCorrect ? 'correct' : ''}}"
+        wx:for="{{sortLines}}"
+        wx:key="id"
+        bindtap="onSortLineTap"
+        data-index="{{index}}"
+      >
+        <text class="sort-line-num">{{item.displayNum}}</text>
+        <text class="sort-line-text">{{item.text}}</text>
+      </view>
+    </view>
+    <view class="submit-btn-wrap">
+      <button class="action-btn primary" bindtap="submitSort" disabled="{{submitting}}">提交</button>
+    </view>
+  </view>
+
+  <!-- ========== 第三关：语音背诵 ========== -->
+  <view class="stage-content" wx:if="{{currentStage === 3}}">
+    <view class="voice-prompt">
+      <text>请背诵这首诗，点击录音开始</text>
+    </view>
+
+    <!-- 原诗提示（仅展示首句） -->
+    <view class="voice-hint" wx:if="{{poemFirstLine}}">
+      <text class="voice-hint-text">提示：{{poemFirstLine}}…</text>
+    </view>
+
+    <!-- 录音按钮 -->
+    <view class="voice-btn-area">
+      <view class="voice-btn {{isRecording ? 'recording' : ''}}" bindtap="toggleRecording">
+        <text class="voice-btn-icon">{{isRecording ? '⏹' : '🎙'}}</text>
+        <text class="voice-btn-label">{{isRecording ? '停止录音' : '开始录音'}}</text>
+      </view>
+      <text class="voice-timer" wx:if="{{isRecording}}">{{recordingDuration}}s</text>
+    </view>
+
+    <!-- 识别结果 -->
+    <view class="voice-result" wx:if="{{recognizedText}}">
+      <text class="voice-result-label">识别结果：</text>
+      <text class="voice-result-text">{{recognizedText}}</text>
+    </view>
+
+    <view class="submit-btn-wrap">
+      <button class="action-btn primary" bindtap="submitVoice" disabled="{{submitting || !recognizedText}}">提交</button>
+    </view>
+  </view>
+
+  <!-- ========== 关卡结果弹窗 ========== -->
+  <view class="result-overlay" wx:if="{{showStageResult}}">
+    <view class="result-card">
+      <text class="result-title">{{stageResult.passed ? '通过！' : '继续加油'}}</text>
+      <view class="result-score">
+        <text class="score-num">{{stageResult.score}}</text>
+        <text class="score-unit">分</text>
+      </view>
+      <view class="result-detail" wx:if="{{stageResult.correctCount !== undefined}}">
+        <text class="positive-frame">记对了 {{stageResult.correctCount}} 个字</text>
+      </view>
+      <!-- 错题标记 -->
+      <view class="result-errors" wx:if="{{stageResult.errors && stageResult.errors.length}}">
+        <text class="error-label">需再记：</text>
+        <view class="error-item" wx:for="{{stageResult.errors}}" wx:key="index">
+          <text class="error-wrong">{{item.expected}}</text>
+          <text class="error-arrow">←</text>
+          <text class="error-actual">{{item.actual}}</text>
+        </view>
+      </view>
+      <button class="action-btn primary" bindtap="goNextStage">
+        {{stageResult.passed ? (currentStage < 3 ? '下一关' : '查看结果') : '重新挑战'}}
+      </button>
+    </view>
+  </view>
+
+</view>

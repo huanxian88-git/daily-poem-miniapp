@@ -1,0 +1,355 @@
+/* pages/recite-check/recite-check.wxss - 背诵检查页 */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: var(--safe-bottom);
+}
+
+/* 顶部 */
+.header {
+  text-align: center;
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+}
+
+.poem-title {
+  display: block;
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* 三关进度 */
+.stage-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stage-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: all 0.3s;
+}
+
+.stage-dot.active {
+  background: var(--color-primary);
+}
+
+.stage-dot.done {
+  background: var(--color-secondary);
+}
+
+.stage-line {
+  width: 60rpx;
+  height: 4rpx;
+  background: var(--color-border);
+  margin: 0 var(--spacing-xs);
+  transition: background 0.3s;
+}
+
+.stage-line.active {
+  background: var(--color-secondary);
+}
+
+.stage-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* 阶段内容 */
+.stage-content {
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+/* ========== 第一关：补阙填词 ========== */
+.fill-poem {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-poem);
+  font-size: var(--font-size-xl);
+  line-height: 2.4;
+  letter-spacing: 2rpx;
+  text-align: center;
+}
+
+.fill-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-xs);
+}
+
+.fill-text {
+  white-space: nowrap;
+}
+
+.fill-blank-wrapper {
+  display: inline-flex;
+  margin: 0 4rpx;
+}
+
+.fill-blank-input {
+  width: 80rpx;
+  height: 56rpx;
+  border-bottom: 3rpx solid var(--color-primary);
+  text-align: center;
+  font-size: var(--font-size-lg);
+  font-family: var(--font-poem);
+  color: var(--color-primary);
+  background: transparent;
+}
+
+/* ========== 第二关：排序归位 ========== */
+.sort-hint {
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-md);
+}
+
+.sort-lines {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.sort-line {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 2rpx solid transparent;
+  transition: all 0.2s var(--ease-out);
+}
+
+.sort-line.selected {
+  border-color: var(--color-primary);
+  background: rgba(45, 90, 61, 0.06);
+}
+
+.sort-line.correct {
+  border-color: var(--color-success);
+}
+
+.sort-line-num {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.sort-line-text {
+  font-family: var(--font-poem);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  letter-spacing: 1rpx;
+}
+
+/* ========== 第三关：语音背诵 ========== */
+.voice-prompt {
+  text-align: center;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.voice-hint {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.voice-hint-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.voice-btn-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.voice-btn {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: all 0.2s;
+}
+
+.voice-btn.recording {
+  background: var(--color-accent);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.voice-btn-icon {
+  font-size: 48rpx;
+  margin-bottom: 4rpx;
+}
+
+.voice-btn-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+}
+
+.voice-timer {
+  font-size: var(--font-size-sm);
+  color: var(--color-accent);
+  margin-top: var(--spacing-sm);
+}
+
+.voice-result {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.voice-result-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.voice-result-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+/* 提交按钮区域 */
+.submit-btn-wrap {
+  margin-top: var(--spacing-xl);
+  display: flex;
+  justify-content: center;
+}
+
+/* ========== 关卡结果弹窗 ========== */
+.result-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.result-card {
+  width: 560rpx;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.result-title {
+  display: block;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.result-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.score-num {
+  font-size: 72rpx;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.score-unit {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-left: 8rpx;
+}
+
+.result-detail {
+  margin-bottom: var(--spacing-md);
+}
+
+.positive-frame {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+/* 错题展示 */
+.result-errors {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+  background: rgba(186, 117, 23, 0.06);
+  border-radius: var(--radius-sm);
+}
+
+.error-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-warning);
+  display: block;
+  margin-bottom: var(--spacing-xs);
+}
+
+.error-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-bottom: 4rpx;
+  font-size: var(--font-size-sm);
+}
+
+.error-wrong {
+  color: var(--color-warning);
+  font-weight: 500;
+}
+
+.error-arrow {
+  color: var(--color-text-muted);
+}
+
+.error-actual {
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+}

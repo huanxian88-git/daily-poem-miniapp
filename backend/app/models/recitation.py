@@ -1,8 +1,8 @@
-"""背诵相关模型：Recitation"""
+"""背诵相关模型：Recitation + RecitationAttempt"""
 
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String
+from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -55,3 +55,25 @@ class Recitation(Base):
 
     def __repr__(self) -> str:
         return f"<Recitation(user={self.user_id}, poem={self.poem_id}, status={self.status})>"
+
+
+class RecitationAttempt(Base):
+    """背诵尝试记录（每关一次记录）"""
+
+    __tablename__ = "recitation_attempts"
+
+    id: Mapped[str] = mapped_column(
+        String(36), primary_key=True, default=_uuid_str
+    )
+    recitation_id: Mapped[str] = mapped_column(
+        String(36), ForeignKey("recitations.id"), index=True, nullable=False
+    )
+    stage: Mapped[str] = mapped_column(
+        String(20), nullable=False, index=True
+    )  # "fill" | "sort" | "voice"
+    score: Mapped[int] = mapped_column(Integer, default=0)  # 0-100
+    detail: Mapped[str | None] = mapped_column(Text)  # JSON字符串，存储详细评分信息
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return f"<RecitationAttempt(recitation={self.recitation_id}, stage={self.stage}, score={self.score})>"

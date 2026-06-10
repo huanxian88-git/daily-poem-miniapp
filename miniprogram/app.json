@@ -2,7 +2,12 @@
   "pages": [
     "pages/index/index",
     "pages/recite/recite",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/poem/poem",
+    "pages/onboarding/onboarding",
+    "pages/recite-check/recite-check",
+    "pages/recite-result/recite-result",
+    "pages/review/review"
   ],
   "window": {
     "navigationBarBackgroundColor": "#2D5A3D",

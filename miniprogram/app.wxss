@@ -6,17 +6,19 @@
 /* ===== CSS 变量（设计 Token） ===== */
 page {
   /* 色彩 */
-  --color-bg: #FAFAF5;          /* 月白底 */
-  --color-primary: #2C3E50;     /* 深青 */
-  --color-accent: #5D8A6B;      /* 松绿 */
-  --color-gold: #9A8A6A;        /* 淡金 */
+  --color-bg: #FAF8F5;          /* 米白底 */
+  --color-primary: #2D5A3D;     /* 松绿（主色） */
+  --color-secondary: #C4A265;   /* 淡金（次色） */
+  --color-accent: #C44536;      /* 朱砂（强调） */
+  --color-gold: #9A8A6A;        /* 淡金（旧版兼容） */
+  --color-warning: #BA7517;     /* 琥珀（错题标记） */
   --color-text: #2C3E50;        /* 主文字 */
   --color-text-secondary: #7A8A9A; /* 次级文字 */
   --color-text-muted: #B0B8C0;  /* 弱化文字 */
   --color-border: #E8E4DD;      /* 分割线 */
   --color-white: #FFFFFF;
-  --color-error: #C0644A;       /* 错误/警告（琥珀色，非正红） */
-  --color-success: #5D8A6B;     /* 成功（复用松绿） */
+  --color-error: #C0644A;       /* 错误/警告 */
+  --color-success: #5D8A6B;     /* 成功 */
 
   /* 互动态 */
   --color-hover: rgba(44, 62, 80, 0.04);
