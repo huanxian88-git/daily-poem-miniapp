@@ -1,0 +1,72 @@
+# docker-compose.yml - 天天半首诗 本地开发环境
+# 启动：docker compose up -d
+# 停止：docker compose down
+# 查看日志：docker compose logs -f
+
+version: "3.8"
+
+services:
+  # ------- PostgreSQL 数据库 -------
+  postgres:
+    image: postgres:15-alpine
+    container_name: daily-poem-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dailyapp
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_DB: daily_poem
+      TZ: Asia/Shanghai
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dailyapp"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ------- Redis 缓存 + 锁 -------
+  redis:
+    image: redis:7-alpine
+    container_name: daily-poem-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass redispass
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redispass", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # ------- 后端服务（本地开发模式）-------
+  # 先构建镜像，然后以热重载模式启动
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: daily-poem-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+asyncpg://dailyapp:localdev@postgres:5432/daily_poem
+      REDIS_URL: redis://:redispass@redis:6379/0
+      APP_ENV: development
+      DEBUG: "true"
+    volumes:
+      - ./backend:/app
+      - ./data:/app/data
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  pgdata:
+  redisdata:
