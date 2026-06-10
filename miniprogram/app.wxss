@@ -1,0 +1,19 @@
+page {
+  background-color: #F8F5EF;
+  color: #2C2C2C;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.container {
+  padding: 32rpx;
+}
+
+/* 主题色变量 */
+:root {
+  --color-primary: #BA7517;
+  --color-primary-light: #F5EDE0;
+  --color-success: #5D8A6B;
+  --color-bg: #F8F5EF;
+  --color-text: #2C2C2C;
+  --color-text-secondary: #6B6B6B;
+}

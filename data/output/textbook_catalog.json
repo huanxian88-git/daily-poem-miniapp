@@ -1,0 +1,243 @@
+[
+  {
+    "grade": 1,
+    "volume": "上册",
+    "poems": [
+      {"title": "咏鹅", "author": "骆宾王", "dynasty": "唐"},
+      {"title": "江南", "author": "汉乐府", "dynasty": "汉"},
+      {"title": "画", "author": "王维", "dynasty": "唐"},
+      {"title": "悯农（其二）", "author": "李绅", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 1,
+    "volume": "下册",
+    "poems": [
+      {"title": "春晓", "author": "孟浩然", "dynasty": "唐"},
+      {"title": "赠汪伦", "author": "李白", "dynasty": "唐"},
+      {"title": "静夜思", "author": "李白", "dynasty": "唐"},
+      {"title": "寻隐者不遇", "author": "贾岛", "dynasty": "唐"},
+      {"title": "池上", "author": "白居易", "dynasty": "唐"},
+      {"title": "小池", "author": "杨万里", "dynasty": "南宋"}
+    ]
+  },
+  {
+    "grade": 2,
+    "volume": "上册",
+    "poems": [
+      {"title": "梅花", "author": "王安石", "dynasty": "北宋"},
+      {"title": "小儿垂钓", "author": "胡令能", "dynasty": "唐"},
+      {"title": "登鹳雀楼", "author": "王之涣", "dynasty": "唐"},
+      {"title": "望庐山瀑布", "author": "李白", "dynasty": "唐"},
+      {"title": "江雪", "author": "柳宗元", "dynasty": "唐"},
+      {"title": "夜宿山寺", "author": "李白", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 2,
+    "volume": "下册",
+    "poems": [
+      {"title": "村居", "author": "高鼎", "dynasty": "清"},
+      {"title": "咏柳", "author": "贺知章", "dynasty": "唐"},
+      {"title": "赋得古原草送别", "author": "白居易", "dynasty": "唐"},
+      {"title": "晓出净慈寺送林子方", "author": "杨万里", "dynasty": "南宋"},
+      {"title": "绝句", "author": "杜甫", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 3,
+    "volume": "上册",
+    "poems": [
+      {"title": "山行", "author": "杜牧", "dynasty": "唐"},
+      {"title": "赠刘景文", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "夜书所见", "author": "叶绍翁", "dynasty": "南宋"},
+      {"title": "望天门山", "author": "李白", "dynasty": "唐"},
+      {"title": "饮湖上初晴后雨", "author": "苏轼", "dynasty": "北宋"}
+    ]
+  },
+  {
+    "grade": 3,
+    "volume": "下册",
+    "poems": [
+      {"title": "绝句", "author": "杜甫", "dynasty": "唐"},
+      {"title": "惠崇春江晚景", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "三衢道中", "author": "曾几", "dynasty": "南宋"},
+      {"title": "元日", "author": "王安石", "dynasty": "北宋"},
+      {"title": "清明", "author": "杜牧", "dynasty": "唐"},
+      {"title": "九月九日忆山东兄弟", "author": "王维", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 4,
+    "volume": "上册",
+    "poems": [
+      {"title": "浪淘沙", "author": "刘禹锡", "dynasty": "唐"},
+      {"title": "鹿柴", "author": "王维", "dynasty": "唐"},
+      {"title": "暮江吟", "author": "白居易", "dynasty": "唐"},
+      {"title": "题西林壁", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "雪梅", "author": "卢梅坡", "dynasty": "宋"},
+      {"title": "出塞", "author": "王昌龄", "dynasty": "唐"},
+      {"title": "凉州词", "author": "王翰", "dynasty": "唐"},
+      {"title": "夏日绝句", "author": "李清照", "dynasty": "南宋"}
+    ]
+  },
+  {
+    "grade": 4,
+    "volume": "下册",
+    "poems": [
+      {"title": "四时田园杂兴", "author": "范成大", "dynasty": "南宋"},
+      {"title": "宿新市徐公店", "author": "杨万里", "dynasty": "南宋"},
+      {"title": "清平乐·村居", "author": "辛弃疾", "dynasty": "南宋"},
+      {"title": "蜂", "author": "罗隐", "dynasty": "唐"},
+      {"title": "独坐敬亭山", "author": "李白", "dynasty": "唐"},
+      {"title": "芙蓉楼送辛渐", "author": "王昌龄", "dynasty": "唐"},
+      {"title": "塞下曲", "author": "卢纶", "dynasty": "唐"},
+      {"title": "墨梅", "author": "王冕", "dynasty": "元"}
+    ]
+  },
+  {
+    "grade": 5,
+    "volume": "上册",
+    "poems": [
+      {"title": "示儿", "author": "陆游", "dynasty": "南宋"},
+      {"title": "题临安邸", "author": "林升", "dynasty": "南宋"},
+      {"title": "己亥杂诗", "author": "龚自珍", "dynasty": "清"},
+      {"title": "山居秋暝", "author": "王维", "dynasty": "唐"},
+      {"title": "枫桥夜泊", "author": "张继", "dynasty": "唐"},
+      {"title": "长相思", "author": "纳兰性德", "dynasty": "清"}
+    ]
+  },
+  {
+    "grade": 5,
+    "volume": "下册",
+    "poems": [
+      {"title": "四时田园杂兴（其二）", "author": "范成大", "dynasty": "南宋"},
+      {"title": "稚子弄冰", "author": "杨万里", "dynasty": "南宋"},
+      {"title": "村晚", "author": "雷震", "dynasty": "南宋"},
+      {"title": "游子吟", "author": "孟郊", "dynasty": "唐"},
+      {"title": "鸟鸣涧", "author": "王维", "dynasty": "唐"},
+      {"title": "从军行", "author": "王昌龄", "dynasty": "唐"},
+      {"title": "秋夜将晓出篱门迎凉有感", "author": "陆游", "dynasty": "南宋"},
+      {"title": "闻官军收河南河北", "author": "杜甫", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 6,
+    "volume": "上册",
+    "poems": [
+      {"title": "宿建德江", "author": "孟浩然", "dynasty": "唐"},
+      {"title": "六月二十七日望湖楼醉书", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "西江月·夜行黄沙道中", "author": "辛弃疾", "dynasty": "南宋"},
+      {"title": "过故人庄", "author": "孟浩然", "dynasty": "唐"},
+      {"title": "七律·长征", "author": "毛泽东", "dynasty": "现代"}
+    ]
+  },
+  {
+    "grade": 6,
+    "volume": "下册",
+    "poems": [
+      {"title": "马诗", "author": "李贺", "dynasty": "唐"},
+      {"title": "石灰吟", "author": "于谦", "dynasty": "明"},
+      {"title": "竹石", "author": "郑燮", "dynasty": "清"},
+      {"title": "采薇", "author": "诗经", "dynasty": "周"},
+      {"title": "送元二使安西", "author": "王维", "dynasty": "唐"},
+      {"title": "春夜喜雨", "author": "杜甫", "dynasty": "唐"},
+      {"title": "早春呈水部张十八员外", "author": "韩愈", "dynasty": "唐"},
+      {"title": "江上渔者", "author": "范仲淹", "dynasty": "北宋"},
+      {"title": "泊船瓜洲", "author": "王安石", "dynasty": "北宋"},
+      {"title": "游园不值", "author": "叶绍翁", "dynasty": "南宋"},
+      {"title": "卜算子·送鲍浩然之浙东", "author": "王观", "dynasty": "北宋"}
+    ]
+  },
+  {
+    "grade": 7,
+    "volume": "上册",
+    "poems": [
+      {"title": "观沧海", "author": "曹操", "dynasty": "东汉"},
+      {"title": "闻王昌龄左迁龙标遥有此寄", "author": "李白", "dynasty": "唐"},
+      {"title": "次北固山下", "author": "王湾", "dynasty": "唐"},
+      {"title": "天净沙·秋思", "author": "马致远", "dynasty": "元"},
+      {"title": "峨眉山月歌", "author": "李白", "dynasty": "唐"},
+      {"title": "江南逢李龟年", "author": "杜甫", "dynasty": "唐"},
+      {"title": "行军九日思长安故园", "author": "岑参", "dynasty": "唐"},
+      {"title": "夜上受降城闻笛", "author": "李益", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 7,
+    "volume": "下册",
+    "poems": [
+      {"title": "竹里馆", "author": "王维", "dynasty": "唐"},
+      {"title": "春夜洛城闻笛", "author": "李白", "dynasty": "唐"},
+      {"title": "逢入京使", "author": "岑参", "dynasty": "唐"},
+      {"title": "晚春", "author": "韩愈", "dynasty": "唐"},
+      {"title": "登幽州台歌", "author": "陈子昂", "dynasty": "唐"},
+      {"title": "望岳", "author": "杜甫", "dynasty": "唐"},
+      {"title": "登飞来峰", "author": "王安石", "dynasty": "北宋"},
+      {"title": "游山西村", "author": "陆游", "dynasty": "南宋"},
+      {"title": "己亥杂诗（其五）", "author": "龚自珍", "dynasty": "清"}
+    ]
+  },
+  {
+    "grade": 8,
+    "volume": "上册",
+    "poems": [
+      {"title": "野望", "author": "王绩", "dynasty": "唐"},
+      {"title": "黄鹤楼", "author": "崔颢", "dynasty": "唐"},
+      {"title": "使至塞上", "author": "王维", "dynasty": "唐"},
+      {"title": "渡荆门送别", "author": "李白", "dynasty": "唐"},
+      {"title": "钱塘湖春行", "author": "白居易", "dynasty": "唐"},
+      {"title": "饮酒（其五）", "author": "陶渊明", "dynasty": "东晋"},
+      {"title": "春望", "author": "杜甫", "dynasty": "唐"},
+      {"title": "雁门太守行", "author": "李贺", "dynasty": "唐"},
+      {"title": "赤壁", "author": "杜牧", "dynasty": "唐"},
+      {"title": "渔家傲", "author": "李清照", "dynasty": "南宋"}
+    ]
+  },
+  {
+    "grade": 8,
+    "volume": "下册",
+    "poems": [
+      {"title": "关雎", "author": "诗经", "dynasty": "周"},
+      {"title": "蒹葭", "author": "诗经", "dynasty": "周"},
+      {"title": "式微", "author": "诗经", "dynasty": "周"},
+      {"title": "子衿", "author": "诗经", "dynasty": "周"},
+      {"title": "送杜少府之任蜀州", "author": "王勃", "dynasty": "唐"},
+      {"title": "望洞庭湖赠张丞相", "author": "孟浩然", "dynasty": "唐"},
+      {"title": "茅屋为秋风所破歌", "author": "杜甫", "dynasty": "唐"},
+      {"title": "卖炭翁", "author": "白居易", "dynasty": "唐"},
+      {"title": "题破山寺后禅院", "author": "常建", "dynasty": "唐"},
+      {"title": "送友人", "author": "李白", "dynasty": "唐"},
+      {"title": "卜算子·黄州定慧院寓居作", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "卜算子·咏梅", "author": "陆游", "dynasty": "南宋"}
+    ]
+  },
+  {
+    "grade": 9,
+    "volume": "上册",
+    "poems": [
+      {"title": "行路难", "author": "李白", "dynasty": "唐"},
+      {"title": "酬乐天扬州初逢席上见赠", "author": "刘禹锡", "dynasty": "唐"},
+      {"title": "水调歌头", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "月夜忆舍弟", "author": "杜甫", "dynasty": "唐"},
+      {"title": "长沙过贾谊宅", "author": "刘长卿", "dynasty": "唐"},
+      {"title": "左迁至蓝关示侄孙湘", "author": "韩愈", "dynasty": "唐"},
+      {"title": "商山早行", "author": "温庭筠", "dynasty": "唐"},
+      {"title": "咸阳城东楼", "author": "许浑", "dynasty": "唐"}
+    ]
+  },
+  {
+    "grade": 9,
+    "volume": "下册",
+    "poems": [
+      {"title": "渔家傲·秋思", "author": "范仲淹", "dynasty": "北宋"},
+      {"title": "江城子·密州出猎", "author": "苏轼", "dynasty": "北宋"},
+      {"title": "破阵子·为陈同甫赋壮词以寄之", "author": "辛弃疾", "dynasty": "南宋"},
+      {"title": "满江红", "author": "秋瑾", "dynasty": "清"},
+      {"title": "十五从军征", "author": "汉乐府", "dynasty": "汉"},
+      {"title": "白雪歌送武判官归京", "author": "岑参", "dynasty": "唐"},
+      {"title": "南乡子·登京口北固亭有怀", "author": "辛弃疾", "dynasty": "南宋"},
+      {"title": "过零丁洋", "author": "文天祥", "dynasty": "南宋"}
+    ]
+  }
+]
