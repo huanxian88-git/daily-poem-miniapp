@@ -1,0 +1,61 @@
+# backend/serverless.yml
+# 腾讯云 SCF (Serverless Cloud Function) 部署配置
+# 使用 Serverless Framework 部署：
+#   serverless deploy --stage production
+
+app: daily-poem
+component: scf
+name: daily-poem-backend
+
+inputs:
+  name: daily-poem-backend-${stage}
+  src:
+    src: ./
+    exclude:
+      - tests/**
+      - .pytest_cache/**
+      - __pycache__/**
+      - .env
+      - .env.example
+      - Dockerfile
+      - Dockerfile.dev
+      - .git/**
+      - venv/**
+      - data/**
+  region: ap-guangzhou
+  runtime: Python3.13
+  handler: app.main.handler
+  memorySize: 512
+  timeout: 30
+  environment:
+    variables:
+      APP_ENV: ${stage}
+      DEBUG: "false"
+      DEV_MODE: "false"
+      DATABASE_URL: ${env:DATABASE_URL}
+      REDIS_URL: ${env:REDIS_URL}
+      REDIS_GRACEFUL_DEGRADATION: "false"
+      JWT_SECRET: ${env:JWT_SECRET}
+      JWT_ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: "10080"
+      REFRESH_TOKEN_EXPIRE_DAYS: "30"
+      WECHAT_APPID: ${env:WECHAT_APPID}
+      WECHAT_SECRET: ${env:WECHAT_SECRET}
+      TENCENT_SECRET_ID: ${env:TENCENT_SECRET_ID}
+      TENCENT_SECRET_KEY: ${env:TENCENT_SECRET_KEY}
+      COS_BUCKET: ${env:COS_BUCKET}
+      COS_REGION: ap-guangzhou
+  vpcConfig:
+    vpcId: ${env:VPC_ID}
+    subnetId: ${env:SUBNET_ID}
+  events:
+    - apigw:
+        parameters:
+          protocols:
+            - https
+          environment: release
+          endpoints:
+            - path: /
+              method: ANY
+            - path: /{proxy+}
+              method: ANY

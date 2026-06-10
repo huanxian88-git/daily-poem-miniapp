@@ -2,38 +2,38 @@
   "pages": [
     "pages/index/index",
     "pages/recite/recite",
-    "pages/result/result"
+    "pages/profile/profile"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "每日背诗",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#F8F5EF",
+    "navigationBarBackgroundColor": "#2D5A3D",
+    "navigationBarTitleText": "天天半首诗",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FAF8F5",
     "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#BA7517",
-    "backgroundColor": "#FFFFFF",
+    "color": "#8C8C8C",
+    "selectedColor": "#2D5A3D",
+    "backgroundColor": "#FAF8F5",
     "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "推荐",
-        "iconPath": "assets/tab-home.png",
-        "selectedIconPath": "assets/tab-home-active.png"
+        "text": "首页",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-active.png"
       },
       {
         "pagePath": "pages/recite/recite",
         "text": "吟诵",
-        "iconPath": "assets/tab-recite.png",
-        "selectedIconPath": "assets/tab-recite-active.png"
+        "iconPath": "assets/tabbar/recite.png",
+        "selectedIconPath": "assets/tabbar/recite-active.png"
       },
       {
         "pagePath": "pages/profile/profile",
         "text": "我的",
-        "iconPath": "assets/tab-profile.png",
-        "selectedIconPath": "assets/tab-profile-active.png"
+        "iconPath": "assets/tabbar/profile.png",
+        "selectedIconPath": "assets/tabbar/profile-active.png"
       }
     ]
   },

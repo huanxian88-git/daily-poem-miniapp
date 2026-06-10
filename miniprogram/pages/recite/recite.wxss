@@ -1,0 +1,33 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+}
+
+.page-title {
+  font-size: var(--font-size-xl);
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.placeholder-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400rpx;
+  background-color: #fff;
+  border-radius: var(--radius-md);
+  border: 1rpx solid var(--color-border);
+}
+
+.placeholder-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+}

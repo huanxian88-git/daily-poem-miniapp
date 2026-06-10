@@ -1,0 +1,18 @@
+component: scf
+name: daily-poem-api
+inputs:
+  src:
+    src: ./
+    exclude:
+      - .env
+      - __pycache__
+      - tests
+  handler: app.main.handler
+  runtime: Python3.11
+  events:
+    - apigw:
+        parameters:
+          protocols:
+            - http
+          methods:
+            - ANY
