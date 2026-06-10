@@ -3,7 +3,7 @@
  * 功能：Token 鉴权拦截 + 自动刷新 + 错误处理 + 请求重试
  */
 
-const BASE_URL = 'https://your-api.example.com/api/v1'  // 上线前替换
+const BASE_URL = 'http://localhost:8000/api/v1'  // 本地开发
 
 class ApiService {
   constructor() {
@@ -45,6 +45,25 @@ class ApiService {
   }
 
   /**
+   * 解析后端响应数据
+   * 兼容两种格式：
+   *   标准格式：{code: 0, data: {...}, message: "success"} → 返回 data
+   *   扁平格式：{access_token: "...", ...} → 直接返回
+   */
+  _extractData(responseBody) {
+    if (responseBody && typeof responseBody === 'object' && 'code' in responseBody) {
+      // 标准包装格式
+      if (responseBody.code === 0) {
+        return responseBody.data
+      } else {
+        throw new Error(responseBody.message || '操作失败')
+      }
+    }
+    // 扁平格式，直接返回
+    return responseBody
+  }
+
+  /**
    * 刷新 Access Token
    */
   async refreshAccessToken() {
@@ -62,9 +81,12 @@ class ApiService {
         })
       })
 
-      if (res.statusCode === 200 && res.data.access_token) {
-        this.saveTokens(res.data.access_token, refreshToken)
-        return true
+      if (res.statusCode === 200) {
+        const data = this._extractData(res.data)
+        if (data && data.access_token) {
+          this.saveTokens(data.access_token, refreshToken)
+          return true
+        }
       }
     } catch (e) {
       console.error('Token 刷新失败:', e)
@@ -95,8 +117,8 @@ class ApiService {
             ...header,
           },
           success: (res) => {
+            // Token 过期，尝试刷新后重试
             if (res.statusCode === 401 && retry) {
-              // Token 过期，尝试刷新后重试
               this.refreshAccessToken().then((success) => {
                 if (success) {
                   // 刷新成功，用新 token 重试（但不再 retry）
@@ -113,8 +135,16 @@ class ApiService {
               return
             }
 
+            // HTTP 成功
             if (res.statusCode >= 200 && res.statusCode < 300) {
-              resolve(res.data)
+              try {
+                const result = this._extractData(res.data)
+                resolve(result)
+              } catch (e) {
+                // 业务错误（code !== 0）
+                wx.showToast({ title: e.message || '操作失败', icon: 'none' })
+                reject(e)
+              }
             } else {
               this.handleError(res)
               reject(res)

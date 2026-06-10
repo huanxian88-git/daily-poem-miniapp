@@ -6,14 +6,10 @@ from typing import Optional
 
 import httpx
 from jose import JWTError, jwt
-from passlib.context import CryptContext
 
 from app.core.config import settings
 
 # JWT 配置
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-# 算法
 ALGORITHM = settings.JWT_ALGORITHM
 SECRET_KEY = settings.JWT_SECRET
 TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
@@ -27,6 +23,7 @@ def create_access_token(user_id: str, openid: str) -> str:
     payload = {
         "sub": user_id,
         "openid": openid,
+        "type": "access",
         "iat": datetime.utcnow(),
         "exp": expire,
     }
@@ -54,6 +51,10 @@ def verify_token(token: str) -> Optional[dict]:
         return None
 
 
+# 别名，供 dependencies.py 使用
+decode_token = verify_token
+
+
 def refresh_access_token(refresh_token: str) -> Optional[str]:
     """用 Refresh Token 刷新 Access Token"""
     payload = verify_token(refresh_token)
@@ -69,8 +70,20 @@ def refresh_access_token(refresh_token: str) -> Optional[str]:
 # --- 微信 code2session ---
 
 async def wx_code2session(code: str) -> Optional[dict]:
-    """用微信登录 code 换取 openid + session_key"""
-    url = settings.WECHAT_COD_E2SESSION_URL
+    """用微信登录 code 换取 openid + session_key
+
+    DEV_MODE 下返回 mock 数据，无需真实微信 API。
+    """
+    if settings.DEV_MODE:
+        # 开发模式：用 code 的 hash 生成确定性 openid
+        mock_openid = f"dev_{hash(code) % 1000000:06d}"
+        return {
+            "openid": mock_openid,
+            "session_key": "mock_session_key",
+            "unionid": None,
+        }
+
+    url = settings.WECHAT_CODE2SESSION_URL
     params = {
         "appid": settings.WECHAT_APPID,
         "secret": settings.WECHAT_SECRET,

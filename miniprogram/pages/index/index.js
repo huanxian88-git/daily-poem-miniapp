@@ -61,6 +61,27 @@ Page({
   },
 
   /**
+   * 微信登录
+   */
+  async login() {
+    wx.showLoading({ title: '登录中...' })
+    try {
+      const res = await userStore.login()
+      if (res.success) {
+        wx.showToast({ title: '登录成功', icon: 'success' })
+        this.syncUserState()
+        this.fetchTodayRecommendation()
+      } else {
+        wx.showToast({ title: '登录失败', icon: 'none' })
+      }
+    } catch (e) {
+      wx.showToast({ title: '登录失败', icon: 'none' })
+    } finally {
+      wx.hideLoading()
+    }
+  },
+
+  /**
    * 获取今日推荐
    */
   async fetchTodayRecommendation() {
@@ -120,7 +141,7 @@ Page({
   async toggleFavorite() {
     if (!this.data.poem) return
     try {
-      await api.post('/favorites/toggle', { poem_id: this.data.poem.id })
+      await api.post('/favorites/' + this.data.poem.id)
       wx.showToast({ title: '已珍藏', icon: 'success' })
     } catch (e) {
       wx.showToast({ title: '操作失败', icon: 'none' })

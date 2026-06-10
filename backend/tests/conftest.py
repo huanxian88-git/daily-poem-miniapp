@@ -31,7 +31,7 @@ from app.main import app
 from app.core import database as db_module
 
 test_engine = db_module.engine
-test_async_session = db_module.async_session_factory
+test_async_session = db_module.async_session
 
 
 @pytest_asyncio.fixture(autouse=True)
@@ -59,4 +59,11 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
 @pytest_asyncio.fixture
 async def auth_token() -> str:
     """生成测试用 access_token。"""
-    return create_access_token({"sub": "1", "openid": "test_openid"})
+    return create_access_token("1", "test_openid")
+
+
+@pytest_asyncio.fixture
+async def db_session() -> AsyncGenerator[AsyncSession, None]:
+    """提供测试用的数据库 session。"""
+    async with test_async_session() as session:
+        yield session

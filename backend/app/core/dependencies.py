@@ -2,19 +2,12 @@
 
 from typing import Optional
 
-import redis.asyncio as aioredis
 from fastapi import Depends, Header, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db as _get_db
-from app.core.redis import get_redis as _get_redis
-from app.core.security import decode_token
-from app.schemas.common import (
-    ERR_TOKEN_EXPIRED,
-    ERR_TOKEN_INVALID,
-    ERROR_MESSAGES,
-    ResponseBase,
-)
+from app.core.security import verify_token
+from app.schemas.common import ERR_TOKEN_INVALID, ERR_TOKEN_EXPIRED
 
 
 async def get_db() -> AsyncSession:
@@ -23,13 +16,7 @@ async def get_db() -> AsyncSession:
         yield session
 
 
-async def get_redis() -> Optional[aioredis.Redis]:
-    """获取 Redis 连接（依赖注入）。"""
-    return await _get_redis()
-
-
 async def get_current_user(
-    request: Request,
     authorization: Optional[str] = Header(None),
 ) -> dict:
     """从 Authorization Header 中解析当前用户信息。
@@ -37,52 +24,33 @@ async def get_current_user(
     Header 格式: "Bearer <access_token>"
 
     Returns:
-        用户信息字典 {"sub": user_id, "openid": openid, ...}。
-
-    Raises:
-        HTTPException: Token 缺失、无效或过期。
+        用户信息字典 {"sub": user_id, "openid": openid, ...}
     """
     if not authorization:
         raise HTTPException(
             status_code=401,
-            detail=ResponseBase(
-                code=ERR_TOKEN_INVALID,
-                message="Missing authorization header",
-            ).model_dump(),
+            detail="Missing authorization header",
         )
 
     scheme, _, token = authorization.partition(" ")
     if scheme.lower() != "bearer" or not token:
         raise HTTPException(
             status_code=401,
-            detail=ResponseBase(
-                code=ERR_TOKEN_INVALID,
-                message="Invalid authorization header format",
-            ).model_dump(),
+            detail="Invalid authorization header format",
         )
 
-    try:
-        payload = decode_token(token)
-        if payload.get("type") != "access":
-            raise HTTPException(
-                status_code=401,
-                detail=ResponseBase(
-                    code=ERR_TOKEN_INVALID,
-                    message=ERROR_MESSAGES[ERR_TOKEN_INVALID],
-                ).model_dump(),
-            )
-        return payload
-    except ValueError as exc:
-        msg = str(exc)
-        code = (
-            ERR_TOKEN_EXPIRED
-            if "expired" in msg.lower()
-            else ERR_TOKEN_INVALID
-        )
+    payload = verify_token(token)
+    if payload is None:
         raise HTTPException(
             status_code=401,
-            detail=ResponseBase(
-                code=code,
-                message=msg,
-            ).model_dump(),
+            detail="Token 无效或已过期",
         )
+
+    # 只允许 access token
+    if payload.get("type") != "access":
+        raise HTTPException(
+            status_code=401,
+            detail="需要 access token",
+        )
+
+    return payload

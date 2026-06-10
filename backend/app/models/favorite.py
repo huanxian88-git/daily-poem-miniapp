@@ -1,37 +1,30 @@
-"""收藏模型"""
+"""收藏模型：Favorite"""
 
-import uuid
 from datetime import datetime
 
-from sqlalchemy import DateTime, ForeignKey
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy import DateTime, ForeignKey, String
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
+from app.models.user import _uuid_str
 
 
 class Favorite(Base):
-    """用户收藏"""
+    """用户珍藏"""
 
     __tablename__ = "favorites"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    id: Mapped[str] = mapped_column(
+        String(36), primary_key=True, default=_uuid_str
     )
-    user_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("users.id"), index=True, nullable=False
+    user_id: Mapped[str] = mapped_column(
+        String(36), ForeignKey("users.id"), index=True, nullable=False
     )
-    poem_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("poems.id"), index=True, nullable=False
+    poem_id: Mapped[str] = mapped_column(
+        String(36), ForeignKey("poems.id"), index=True, nullable=False
     )
 
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
-    # 关联
-    user: Mapped["User"] = relationship(back_populates="favorites")
-
     def __repr__(self) -> str:
         return f"<Favorite(user={self.user_id}, poem={self.poem_id})>"
-
-
-from app.models.user import User  # noqa: E402

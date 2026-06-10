@@ -1,13 +1,12 @@
-"""诗词相关模型：Poem + PoemTag"""
+"""诗词相关模型：Poem"""
 
-import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, String, Text, Integer, Float
-from sqlalchemy.dialects.postgresql import UUID, JSONB
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
+from app.models.user import _uuid_str
 
 
 class Poem(Base):
@@ -15,28 +14,25 @@ class Poem(Base):
 
     __tablename__ = "poems"
 
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
+    id: Mapped[str] = mapped_column(
+        String(36), primary_key=True, default=_uuid_str
     )
     title: Mapped[str] = mapped_column(String(128), index=True, nullable=False)
-    author: Mapped[str] = mapped_column(String(64), index=True)
-    dynasty: Mapped[str] = mapped_column(String(32))
+    author: Mapped[str | None] = mapped_column(String(64), index=True)
+    dynasty: Mapped[str | None] = mapped_column(String(32))
 
-    # 正文/注释/译文/背景
+    # 正文/按句分行/注释/译文/背景
     content: Mapped[str] = mapped_column(Text, nullable=False)
+    content_lines: Mapped[str | None] = mapped_column(Text)  # JSON数组字符串
     annotation: Mapped[str | None] = mapped_column(Text)
     translation: Mapped[str | None] = mapped_column(Text)
     background: Mapped[str | None] = mapped_column(Text)
 
-    # 难度（1-5星）
-    difficulty: Mapped[int] = mapped_column(Integer, default=3)
+    # 难度（1-3）
+    difficulty: Mapped[int] = mapped_column(Integer, default=1)
 
-    # 关联事件（JSON对象）
-    related_event: Mapped[dict | None] = mapped_column(JSONB)
-
-    # 课本关联
-    textbook: Mapped[str | None] = mapped_column(String(128))
-    textbook_grade: Mapped[int | None] = mapped_column(Integer)
+    # 结构化标签：意象:月,意象:春雨|主题:思乡|场景:清明
+    tags: Mapped[str | None] = mapped_column(Text)
 
     # AI场景类型
     scene_type: Mapped[str | None] = mapped_column(String(64), index=True)
@@ -59,43 +55,5 @@ class Poem(Base):
         DateTime, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
-    # 关联
-    tags: Mapped[list["PoemTag"]] = relationship(back_populates="poem", cascade="all, delete-orphan")
-    recitations: Mapped[list["Recitation"]] = relationship(back_populates="poem")
-
     def __repr__(self) -> str:
         return f"<Poem(title={self.title}, author={self.author})>"
-
-
-class PoemTag(Base):
-    """诗词标签：意象/主题/场景三类"""
-
-    __tablename__ = "poem_tags"
-
-    id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
-    )
-    poem_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), ForeignKey("poems.id"), index=True
-    )
-
-    # 标签类别
-    category: Mapped[str] = mapped_column(
-        String(20), index=True, nullable=False
-    )  # "imagery" | "theme" | "scene"
-
-    # 标签名
-    name: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
-
-    # 权重
-    weight: Mapped[float] = mapped_column(Float, default=1.0)
-
-    # 关联
-    poem: Mapped["Poem"] = relationship(back_populates="tags")
-
-    def __repr__(self) -> str:
-        return f"<PoemTag(poem_id={self.poem_id}, {self.category}={self.name})>"
-
-
-# 延迟导入以避免循环引用
-from app.models.recitation import Recitation  # noqa: E402, F811

@@ -2,7 +2,7 @@ import userStore from './stores/user-store'
 
 App({
   onLaunch() {
-    console.log('每日背诗启动')
+    console.log('天天半首诗启动')
     // 检查登录状态
     this.checkLogin()
   },
