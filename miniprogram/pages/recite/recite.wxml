@@ -1,0 +1,4 @@
+<!--pages/recite/recite.wxml-->
+<view class="page">
+  <text class="page-title">吟诵</text>
+</view>

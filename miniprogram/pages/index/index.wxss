@@ -1,0 +1,70 @@
+/* pages/index/index.wxss */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding-bottom: var(--safe-bottom);
+}
+
+/* 日期+推荐理由 */
+.date-reason {
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm);
+  text-align: center;
+}
+
+.date-text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  letter-spacing: 2rpx;
+}
+
+.reason-text {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-base);
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* 诗词元信息 */
+.poem-meta {
+  text-align: center;
+  padding: var(--spacing-sm) 0;
+}
+
+.poem-title {
+  display: block;
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 4rpx;
+}
+
+.poem-author {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.poem-difficulty {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: var(--color-gold);
+  margin-top: 4rpx;
+}
+
+/* 展开提示 */
+.expand-hint {
+  text-align: center;
+  padding: var(--spacing-md) 0 var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* 零压力提示 */
+.zero-pressure-hint {
+  text-align: center;
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 4rpx;
+}

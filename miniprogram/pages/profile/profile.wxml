@@ -1,0 +1,9 @@
+<!--pages/profile/profile.wxml-->
+<view class="page">
+  <view class="profile-section">
+    <button wx:if="{{!isLoggedIn}}" class="action-btn primary" bindtap="handleLogin">
+      微信登录
+    </button>
+    <text wx:else>已登录</text>
+  </view>
+</view>

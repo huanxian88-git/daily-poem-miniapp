@@ -1,3 +1,5 @@
+import userStore from './stores/user-store'
+
 App({
   onLaunch() {
     console.log('每日背诗启动')
@@ -10,10 +12,11 @@ App({
     isLoggedIn: false,
   },
 
-  checkLogin() {
+  async checkLogin() {
     const token = wx.getStorageSync('access_token')
     if (token) {
       this.globalData.isLoggedIn = true
+      userStore.set({ isLoggedIn: true })
     }
   },
 })
